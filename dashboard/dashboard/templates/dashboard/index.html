@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Dashboard{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% for trace in traces %}
+    <article class="trace">
+      <header>
+        <div>
+          <h1>{{ trace['uuid'] }}</h1>
+        </div>
+      </header>
+      <p class="body">
+        {{ trace['Events.Attributes'] }}
+      </p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
