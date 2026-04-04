@@ -5,9 +5,9 @@ from werkzeug.exceptions import abort
 from dashboard.db import get_db
 from sqlalchemy import MetaData, Table, select
 
-bp = Blueprint('dashboard', __name__)
+bp = Blueprint('dashboard', __name__, url_prefix="/")
 
-@bp.route('/')
+@bp.route('/', methods=["GET"])
 def index():
     db = get_db()
     metadata = MetaData(schema="openlit")
