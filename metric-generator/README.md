@@ -38,7 +38,7 @@ LLM_MODEL_NAME="model-name"
 ## Run
 
 ```shell
-uv run ./main.py
+uv run --env-file .env ./main.py
 ```
 
 ## Lint

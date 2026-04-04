@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: openlit-db
+  namespace: openlit
+spec:
+  path: /
+  to:
+    name: openlit-db
+    weight: 100
+    kind: Service
+  port:
+    targetPort: http
