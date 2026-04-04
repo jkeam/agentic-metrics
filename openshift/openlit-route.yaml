@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: openlit
+  namespace: openlit
+spec:
+  path: /
+  to:
+    name: openlit
+    weight: 100
+    kind: Service
+  port:
+    targetPort: openlit
+

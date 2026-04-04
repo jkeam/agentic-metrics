@@ -1,0 +1,9 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: openlit
+  namespace: openlit
+spec:
+  connectionConfig:
+    url: https://openlit.github.io/helm
+  name: OpenLIT
