@@ -1,7 +1,7 @@
 [project]
-name = "agentic-metrics"
+name = "metric-generator"
 version = "0.1.0"
-description = "Add your description here"
+description = "Generate test metrics"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
