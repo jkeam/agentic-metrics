@@ -6,7 +6,7 @@ from dashboard.db import get_db, get_traces
 from sqlalchemy import select
 from chartkick.flask import PieChart
 
-bp = Blueprint('dashboard', __name__, url_prefix="/")
+bp = Blueprint('traces', __name__, url_prefix="/traces")
 
 @bp.route('/', methods=["GET"])
 def index():
@@ -17,7 +17,6 @@ def index():
             select(traces.c.TraceId, traces.c.Timestamp, traces.c["Events.Attributes"])
             .where(traces.c.SpanName == "Agentic Metrics")
             .order_by(traces.c.Timestamp.desc())
-            .limit(10)
+            .limit(1000)
         ).fetchall()
-        chart = PieChart({'Blueberry': 44, 'Strawberry': 23})
-    return render_template('dashboard/index.html', chart=chart)
+    return render_template('traces/index.html', traces=traces)

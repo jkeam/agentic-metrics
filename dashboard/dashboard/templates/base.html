@@ -1,15 +1,107 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Dashboard</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Dashboard</h1>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
+<html lang="en" class="pf-v6-theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %} - Agentic Metrics</title>
+  <link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly/patternfly.css">
+  <link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly/patternfly-addons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+</head>
+<body class="pf-v6-c-page">
+
+  <header class="pf-v6-c-masthead" id="dark-masthead">
+      <div class="pf-v6-c-masthead__main">
+          <span class="pf-v6-c-masthead__brand">
+              <img class="pf-v6-c-brand" src="{{ url_for('static', filename='agentic-metrics.png') }}" alt="Agentic Metrics logo" style="height: 3rem;">
+          </span>
+
+          <span id="title">
+              Agentic Metrics
+          </span>
+      </div>
+      <div class="pf-v6-c-masthead__content">
+        <div class="pf-v6-c-toolbar" id="masthead-toolbar">
+            <div class="pf-v6-c-toolbar__content">
+                <!--
+                <div class="pf-v6-c-toolbar__content-section">
+                    <div class="pf-v6-c-toolbar__group pf-m-icon-button-group pf-v6-u-ml-auto pf-m-spacer-md">
+                        <div class="pf-v6-c-toolbar__item">
+                            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Notifications">
+                                <i class="fas fa-bell" aria-hidden="true"></i>
+                                <span class="pf-v6-c-badge pf-m-unread" style="margin-left: 8px;">3</span>
+                            </button>
+                        </div>
+                        <div class="pf-v6-c-toolbar__item">
+                            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Settings">
+                                <i class="fas fa-cog" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="pf-v6-c-toolbar__item">
+                            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Help">
+                                <i class="fas fa-question-circle" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pf-v6-c-toolbar__group">
+                        <div class="pf-v6-c-toolbar__item">
+                            <button class="pf-v6-c-menu-toggle pf-m-plain" type="button" aria-expanded="false">
+                                <span class="pf-v6-c-menu-toggle__icon">
+                                    <img class="pf-v6-c-avatar" src="https://www.patternfly.org/assets/images/img_avatar.svg" alt="Avatar image" />
+                                </span>
+                                <span class="pf-v6-c-menu-toggle__text">Admin User</span>
+                                <span class="pf-v6-c-menu-toggle__controls">
+                                    <span class="pf-v6-c-menu-toggle__toggle-icon">
+                                        <i class="fas fa-caret-down" aria-hidden="true"></i>
+                                    </span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+      </div>
   </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+
+    <div class="pf-v6-c-page__sidebar">
+        <div class="pf-v6-c-page__sidebar-body">
+            <nav class="pf-v6-c-nav" aria-label="Global">
+                <ul class="pf-v6-c-nav__list">
+                    <li class="pf-v6-c-nav__item">
+                        <a href="/" class="pf-v6-c-nav__link {{ 'pf-m-current' if request.path == '/' else '' }}">Dashboard</a>
+                    </li>
+                    <li class="pf-v6-c-nav__item">
+                        <a href="/traces/" class="pf-v6-c-nav__link {{ 'pf-m-current' if request.path == '/traces/' else '' }}">Traces</a>
+                    </li>
+                    <li class="pf-v6-c-nav__item">
+                        <a href="#" class="pf-v6-c-nav__link">Create Custom (coming soon)</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!--
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+    -->
+
+    <main class="pf-v6-c-page__main" tabindex="-1">
+        <section class="pf-v6-c-page__main-section pf-m-light">
+            {% block header %}{% endblock %}
+        </section>
+
+        <section class="pf-v6-c-page__main-section">
+            {% block content %}{% endblock %}
+        </section>
+    </main>
+  <script src="{{ url_for('chartkick.static', filename='Chart.bundle.js') }}"></script>
+  <script src="{{ url_for('chartkick.static', filename='chartkick.js') }}"></script>
+</body>
+</html>

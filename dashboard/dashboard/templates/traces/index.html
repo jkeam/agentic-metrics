@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+
+{% block title %}Traces{% endblock %}
+{% block header %}
+  <div class="pf-v6-c-content">
+    <h1>Traces</h1>
+    <p>Listing of all traces.</p>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+<!-- Tooltips -->
+<div id="tooltip-uuid" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    UUID
+  </div>
+</div>
+<div id="tooltip-createdat" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Created At
+  </div>
+</div>
+<div id="tooltip-issueid" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Issue Id
+  </div>
+</div>
+<div id="tooltip-issuecreatedat" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Issue Created At
+  </div>
+</div>
+<div id="tooltip-mra" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Merge Requested At
+  </div>
+</div>
+<div id="tooltip-loc" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Lines of Code
+  </div>
+</div>
+<div id="tooltip-tcprem" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Test Coverage Pre Migration
+  </div>
+</div>
+<div id="tooltip-tcpostm" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Test Coverage Post Migration
+  </div>
+</div>
+<div id="tooltip-unittestfailure" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Unit Test Failure Count
+  </div>
+</div>
+<div id="tooltip-unittesttotal" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Unit Test Total Count
+  </div>
+</div>
+<div id="tooltip-cveprem" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    CVE Count Pre Migration
+  </div>
+</div>
+<div id="tooltip-cvepostm" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    CVE Count Post Migration
+  </div>
+</div>
+<div id="tooltip-btpremf" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Behavior Test Pre Migration Failures
+  </div>
+</div>
+<div id="tooltip-btpremtc" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Behavior Test Pre Migration Total Count
+  </div>
+</div>
+<div id="tooltip-btpostmf" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Behavior Test Post Migration Failures
+  </div>
+</div>
+<div id="tooltip-btpostmtc" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Behavior Test Post Migration Total Count
+  </div>
+</div>
+
+<!-- Traces -->
+<table class="pf-v6-c-table pf-m-grid-md" role="grid" aria-label="Simple Table Example">
+  <thead class="pf-v6-c-table__thead">
+    <tr class="pf-v6-c-table__tr">
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-uuid">
+          UUID
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-createdat">
+          Created At
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-issueid">
+          Issue Id
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-issuecreatedat">
+          Issue Created At
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-mra">
+          Merge Requested At
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-loc">
+          Lines of Code
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-tcprem">
+          Test Coverage Pre Migration
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-tcpostm">
+          Test Coverage Post Migration
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-unittestfailure">
+          Unit Test Failure Count
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-unittesttotal">
+          Unit Test Total Count
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-cveprem">
+          CVE Count Pre Migration
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-cvepostm">
+          CVE Count Post Migration
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-btpremf">
+          Behavior Test Pre Migration Failures
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-btpremtc">
+          Behavior Test Pre Migration Total Count
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-btpostmf">
+          Behavior Test Post Migration Failures
+        </span>
+      </th>
+      <th class="pf-v6-c-table__th pf-m-truncate" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-btpostmtc">
+          Behavior Test Post Migration Total Count
+        </span>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="pf-v6-c-table__tbody">
+    {% for trace in traces %}
+    {% for attr in trace['Events.Attributes'] %}
+    <tr class="pf-v6-c-table__tr">
+        <td class="pf-v6-c-table__td" data-label="UUID">{{ attr['uuid'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Created At">{{ attr['created_at'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Issue Id">{{ attr['issue_id'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Issue Created At">{{ attr['issue_created_at'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Merge Requested At">{{ attr['merge_requested_at'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Lines of Code">{{ attr['lines_of_code_count'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Test Coverage Per Migration">{{ attr['test_coverage_pre_migration'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Test Coverage Post Migration">{{ attr['test_coverage_post_migration'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Unit Test Failure Count">{{ attr['unit_test_failure_count'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Unit Test Total Count">{{ attr['unit_test_total_count'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="CVE Count Pre Migration">{{ attr['cve_count_pre_migration'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="CVE Count Post Migration">{{ attr['cve_count_post_migration'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Behavior Test Pre Migration Failure Count">{{ attr['behavior_test_pre_migration_failure_count'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Behavior Test Pre Migration Total Count">{{ attr['behavior_test_pre_migration_total_count'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Behavior Test Post Migration Failure Count">{{ attr['behavior_test_post_migration_failure_count'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Behavior Test Post Migration Total Count">{{ attr['behavior_test_post_migration_total_count'] }}</td>
+    </tr>
+    {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- Hover over tooltip -->
+<script type="text/javascript">
+// Initialize all tooltips
+document.querySelectorAll('.tooltip-trigger').forEach(trigger => {
+  const tooltipId = trigger.getAttribute('data-target');
+  const tooltip = document.getElementById(tooltipId);
+
+  if (!tooltip) return;
+
+  // Create the Popper instance for this specific pair
+  const popperInstance = Popper.createPopper(trigger, tooltip, {
+    placement: 'top',
+    modifiers: [
+      { name: 'flip', enabled: false }, // Force it to stay on top
+      { name: 'offset', options: { offset: [0, 8] } }
+    ],
+  });
+
+  // Show logic
+  function show() {
+    tooltip.style.display = 'block';
+    popperInstance.update();
+  }
+
+  // Hide logic
+  function hide() {
+    tooltip.style.display = 'none';
+  }
+
+  // Bind events to this specific trigger
+  trigger.addEventListener('mouseenter', show);
+  trigger.addEventListener('focus', show);
+  trigger.addEventListener('mouseleave', hide);
+  trigger.addEventListener('blur', hide);
+});
+</script>
+
+{% endblock %}

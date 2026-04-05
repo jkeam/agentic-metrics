@@ -28,5 +28,5 @@ DB_PASSWORD=OPENLIT
 ## Run
 
 ```shell
-uv run --env-file .env ./main.py
+uv run --env-file .env flask --app dashboard run
 ```

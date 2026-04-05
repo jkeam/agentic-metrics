@@ -1,17 +1,16 @@
 from os import makedirs, getenv
-
+from chartkick.flask import chartkick_blueprint
 from flask import Flask
 
 def create_app(test_config=None):
-    # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
-        SECRET_KEY='dev'
+        SECRET_KEY = 'dev',
+        DB_HOST = getenv("DB_HOST", "openlit-db.openlit.svc.cluster.local"),
+        DB_PORT = int(getenv("DB_PORT", "8123")),
+        DB_USER = getenv("DB_USER", "default"),
+        DB_PASSWORD = getenv("DB_PASSWORD", "OPENLIT"),
     )
-    app.config["DB_HOST"] = getenv("DB_HOST", "openlit-db.openlit.svc.cluster.local")
-    app.config["DB_PORT"] = int(getenv("DB_PORT", "8123"))
-    app.config["DB_USER"] = getenv("DB_USER", "default")
-    app.config["DB_PASSWORD"] = getenv("DB_PASSWORD", "OPENLIT")
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -30,7 +29,10 @@ def create_app(test_config=None):
     def healthz():
         return 'healthy'
 
+    app.register_blueprint(chartkick_blueprint)
     from . import dashboard
     app.register_blueprint(dashboard.bp)
+    from . import traces
+    app.register_blueprint(traces.bp)
 
     return app
