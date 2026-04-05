@@ -25,13 +25,9 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    @app.route('/healthz')
-    def healthz():
-        return 'healthy'
-
     app.register_blueprint(chartkick_blueprint)
-    from . import dashboard
-    app.register_blueprint(dashboard.bp)
+    from . import home
+    app.register_blueprint(home.bp)
     from . import traces
     app.register_blueprint(traces.bp)
 

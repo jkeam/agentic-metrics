@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
   <title>{% block title %}{% endblock %} - Agentic Metrics</title>
   <link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly/patternfly.css">
   <link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly/patternfly-addons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
   <script src="https://unpkg.com/@popperjs/core@2"></script>
 </head>
 <body class="pf-v6-c-page">
@@ -15,7 +16,7 @@
   <header class="pf-v6-c-masthead" id="dark-masthead">
       <div class="pf-v6-c-masthead__main">
           <span class="pf-v6-c-masthead__brand">
-              <img class="pf-v6-c-brand" src="{{ url_for('static', filename='agentic-metrics.png') }}" alt="Agentic Metrics logo" style="height: 3rem;">
+              <img class="pf-v6-c-brand" src="{{ url_for('static', filename='images/agentic-metrics.png') }}" alt="Agentic Metrics logo" style="height: 3rem;">
           </span>
 
           <span id="title">

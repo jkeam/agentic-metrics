@@ -5,6 +5,6 @@ App to demonstrate create agentic metrics and displaying them.
 
 Take a look at the `README.md` in the `metric-generator` directory.
 
-## Dashboard
+## Metric Dashboard
 
-Take a look at the `README.md` in the `dashboard` directory.
+Take a look at the `README.md` in the `metric-dashboard` directory.
