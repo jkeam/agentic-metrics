@@ -30,7 +30,7 @@ def create_app(test_config=None):
     app.register_blueprint(home.bp)
     from . import spans
     app.register_blueprint(spans.bp)
-    from . import traces
-    app.register_blueprint(traces.bp)
+    from . import events
+    app.register_blueprint(events.bp)
 
     return app

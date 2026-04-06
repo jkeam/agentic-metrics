@@ -7,31 +7,31 @@ from sqlalchemy import select, func, distinct
 from chartkick.flask import PieChart
 from math import ceil
 
-bp = Blueprint('traces', __name__, url_prefix="/traces")
+bp = Blueprint('events', __name__, url_prefix="/events")
 
 @bp.route('/', methods=["GET"])
 def index():
     page = request.args.get('page', 1, type=int)
     page_size = request.args.get('page_size', 50, type=int)
     db = get_db()
-    traces = get_traces()
+    table = get_traces()
     with db.begin() as conn:
-        traces_result = conn.execute(
-            select(traces.c.SpanId, traces.c["Events.Attributes"])
-            .where(traces.c.SpanName == "Agentic Metrics")
-            .order_by(traces.c.Timestamp.desc())
+        traces = conn.execute(
+            select(table.c.SpanId, table.c["Events.Attributes"])
+            .where(table.c.SpanName == "Agentic Metrics")
+            .order_by(table.c.Timestamp.desc())
             .limit(page_size)
             .offset((page - 1) * page_size)
         ).fetchall()
         total = conn.execute(
-            select(func.count(distinct(traces.c.SpanId)))
-            .where(traces.c.SpanName == "Agentic Metrics")
+            select(func.count(distinct(table.c.SpanId)))
+            .where(table.c.SpanName == "Agentic Metrics")
         ).scalar()
         total_pages = ceil(total / page_size)
-    return render_template('traces/index.html', traces=traces_result, page=page, page_size=page_size, total=total, total_pages=total_pages)
+    return render_template('events/index.html', traces=traces, page=page, page_size=page_size, total=total, total_pages=total_pages)
 
-@bp.route('/<span_id>/<trace_uuid>', methods=["GET"])
-def show(span_id, trace_uuid):
+@bp.route('/<span_id>/<event_uuid>', methods=["GET"])
+def show(span_id, event_uuid):
     db = get_db()
     table = get_traces()
     with db.begin() as conn:
@@ -40,5 +40,5 @@ def show(span_id, trace_uuid):
             .where(table.c.SpanId == span_id)
         ).first()
         attrs = trace._mapping['Events.Attributes']
-        trace = next((a for a in attrs if a["uuid"] == trace_uuid), None)
-    return render_template('traces/show.html', span_id=span_id, trace=trace)
+        event = next((a for a in attrs if a["uuid"] == event_uuid), None)
+    return render_template('events/show.html', span_id=span_id, event=event)
