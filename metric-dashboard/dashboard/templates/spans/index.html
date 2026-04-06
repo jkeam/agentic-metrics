@@ -71,6 +71,8 @@
         <td class="pf-v6-c-table__td" data-label="Timestamp">{{ trace['Timestamp'] }}</td>
         <td class="pf-v6-c-table__td" data-label="Actions">
           <a href="/spans/{{trace['SpanId']}}"> View </a>
+          |
+          <a href="/spans/{{trace['SpanId']}}/metrics"> Metrics </a>
         </td>
     </tr>
     {% endfor %}

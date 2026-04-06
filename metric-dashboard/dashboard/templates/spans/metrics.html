@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Span Metrics{% endblock %}
+{% block header %}
+  <div class="pf-v6-c-content">
+    <h1>Span</h1>
+    <p>Id: {{ id }}</p>
+  </div>
+{% endblock %}
+
+{% from "spans/_card.html" import render_card %}
+
+{% block content %}
+  <div class="pf-v6-l-gallery pf-m-gutter">
+    {{ render_card(title="Lead Time Per Story", chart=chart_ltps) }}
+    {{ render_card(title="Developer Hours Per Lines of Code", chart=chart_dhplc) }}
+    {{ render_card(title="Deployment Frequency", chart=chart_df) }}
+    {{ render_card(title="Test Coverage Recovery Rate", chart=chart_tcrr) }}
+    {{ render_card(title="Defect Leakage Rate", chart=chart_dlr) }}
+    {{ render_card(title="Technical Debt Reduction", chart=chart_tdr) }}
+    {{ render_card(title="Behavior Fidelity Capture", chart=chart_bfc) }}
+  </div>
+{% endblock %}
