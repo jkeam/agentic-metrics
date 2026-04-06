@@ -8,6 +8,7 @@ dependencies = [
     "chartkick>=1.1.0",
     "clickhouse-connect>=0.15.1",
     "flask>=3.1.3",
+    "gunicorn>=25.3.0",
     "sqlalchemy>=2.0.49",
 ]
 

@@ -30,3 +30,13 @@ DB_PASSWORD=OPENLIT
 ```shell
 uv run --env-file .env flask --app dashboard run
 ```
+
+## Building
+
+```shell
+cd ./metric-dashboard
+# replace with your own repo
+podman build -t quay.io/jkeam/metric-dashboard -f ./Containerfile .
+# test by running it
+# podman run --rm --env-file .env -p 8000:8000 -t quay.io/jkeam/metric-dashboard
+```
