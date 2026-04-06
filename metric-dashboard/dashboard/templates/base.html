@@ -1,32 +1,32 @@
 <!doctype html>
 <html lang="en" class="pf-v6-theme-dark">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
-  <title>{% block title %}{% endblock %} - Agentic Metrics</title>
-  <link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly/patternfly.css">
-  <link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly/patternfly-addons.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-  <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+    <title>{% block title %}{% endblock %} - Agentic Metrics</title>
+    <link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly/patternfly.css">
+    <link rel="stylesheet" href="https://unpkg.com/@patternfly/patternfly/patternfly-addons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
 </head>
+
 <body class="pf-v6-c-page">
-
-  <header class="pf-v6-c-masthead" id="dark-masthead">
-      <div class="pf-v6-c-masthead__main">
-          <span class="pf-v6-c-masthead__brand">
-              <img class="pf-v6-c-brand" src="{{ url_for('static', filename='images/agentic-metrics.png') }}" alt="Agentic Metrics logo" style="height: 3rem;">
-          </span>
-
-          <span id="title">
-              Agentic Metrics
-          </span>
-      </div>
-      <div class="pf-v6-c-masthead__content">
-        <div class="pf-v6-c-toolbar" id="masthead-toolbar">
-            <div class="pf-v6-c-toolbar__content">
-                <!--
+    <header class="pf-v6-c-masthead" id="dark-masthead">
+        <div class="pf-v6-c-masthead__main">
+            <span class="pf-v6-c-masthead__brand">
+                <img class="pf-v6-c-brand" src="{{ url_for('static', filename='images/agentic-metrics.png') }}" alt="Agentic Metrics logo" style="height: 3rem;">
+            </span>
+            <span id="title">
+                Agentic Metrics
+            </span>
+        </div>
+        <div class="pf-v6-c-masthead__content">
+            <div class="pf-v6-c-toolbar" id="masthead-toolbar">
+                <div class="pf-v6-c-toolbar__content">
+                    <!--
                 <div class="pf-v6-c-toolbar__content-section">
                     <div class="pf-v6-c-toolbar__group pf-m-icon-button-group pf-v6-u-ml-auto pf-m-spacer-md">
                         <div class="pf-v6-c-toolbar__item">
@@ -64,11 +64,10 @@
                     </div>
                 </div>
                 -->
+                </div>
             </div>
         </div>
-      </div>
-  </header>
-
+    </header>
     <div class="pf-v6-c-page__sidebar">
         <div class="pf-v6-c-page__sidebar-body">
             <nav class="pf-v6-c-nav" aria-label="Global">
@@ -86,23 +85,21 @@
             </nav>
         </div>
     </div>
-
     <!--
       {% for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
       {% endfor %}
     -->
-
-    <main class="pf-v6-c-page__main" tabindex="-1">
+    <main class="pf-v6-c-page__main-container pf-m-fill" tabindex="-1">
         <section class="pf-v6-c-page__main-section pf-m-light">
             {% block header %}{% endblock %}
         </section>
-
         <section class="pf-v6-c-page__main-section">
             {% block content %}{% endblock %}
         </section>
     </main>
-  <script src="{{ url_for('chartkick.static', filename='Chart.bundle.js') }}"></script>
-  <script src="{{ url_for('chartkick.static', filename='chartkick.js') }}"></script>
+    <script src="{{ url_for('chartkick.static', filename='Chart.bundle.js') }}"></script>
+    <script src="{{ url_for('chartkick.static', filename='chartkick.js') }}"></script>
 </body>
+
 </html>

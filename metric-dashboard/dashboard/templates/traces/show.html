@@ -4,8 +4,11 @@
 {% block header %}
   <div class="pf-v6-c-content">
     <h1>Trace</h1>
-    <p>Span id: {{ span_id }}</p>
-    <p>UUID: {{ trace['uuid'] }}</p>
+    <p>
+      Span id: {{ span_id }}
+      <br />
+      UUID: {{ trace['uuid'] }}
+    </p>
   </div>
 {% endblock %}
 
