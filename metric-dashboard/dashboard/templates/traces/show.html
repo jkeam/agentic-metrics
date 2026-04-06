@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Span{% endblock %}
+{% block header %}
+  <div class="pf-v6-c-content">
+    <h1>Trace</h1>
+    <p>Span id: {{ span_id }}</p>
+    <p>UUID: {{ trace['uuid'] }}</p>
+  </div>
+{% endblock %}
+
+{% block content %}
+<table class="pf-v6-c-table pf-m-grid-md" role="grid" aria-label="Simple Table Example">
+  <thead class="pf-v6-c-table__thead">
+    <tr class="pf-v6-c-table__tr">
+      <th class="pf-v6-c-table__th" scope="col">
+        Key
+      </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        Value
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="pf-v6-c-table__tbody">
+    {% for key, value in trace.items() %}
+    <tr class="pf-v6-c-table__tr">
+      <td class="pf-v6-c-table__td" data-label="Key">
+        {{ key }}
+      </td>
+      <td class="pf-v6-c-table__td" data-label="Value">
+        {{ value }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

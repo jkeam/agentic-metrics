@@ -113,6 +113,12 @@
     Behavior Test Post Migration Total Count
   </div>
 </div>
+<div id="tooltip-actions" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Actions
+  </div>
+</div>
 
 <!-- Traces -->
 <table class="pf-v6-c-table pf-m-grid-md" role="grid" aria-label="Simple Table Example">
@@ -203,6 +209,11 @@
           Behavior Test Post Migration Total Count
         </span>
       </th>
+      <th class="pf-v6-c-table__th pf-m-truncate" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-actions">
+          Actions
+        </span>
+      </th>
     </tr>
   </thead>
 
@@ -227,6 +238,9 @@
         <td class="pf-v6-c-table__td" data-label="Behavior Test Pre Migration Total Count">{{ attr['behavior_test_pre_migration_total_count'] }}</td>
         <td class="pf-v6-c-table__td" data-label="Behavior Test Post Migration Failure Count">{{ attr['behavior_test_post_migration_failure_count'] }}</td>
         <td class="pf-v6-c-table__td" data-label="Behavior Test Post Migration Total Count">{{ attr['behavior_test_post_migration_total_count'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Actions">
+          <a href="/traces/{{trace['SpanId']}}/{{attr['uuid']}}"> View </a>
+        </td>
     </tr>
     {% endfor %}
     {% endfor %}

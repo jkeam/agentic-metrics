@@ -29,3 +29,16 @@ def index():
         ).scalar()
         total_pages = ceil(total / page_size)
     return render_template('traces/index.html', traces=traces_result, page=page, page_size=page_size, total=total, total_pages=total_pages)
+
+@bp.route('/<span_id>/<trace_uuid>', methods=["GET"])
+def show(span_id, trace_uuid):
+    db = get_db()
+    table = get_traces()
+    with db.begin() as conn:
+        trace = conn.execute(
+            select(table.c.SpanId, table.c.TraceId, table.c.Timestamp, table.c["Events.Attributes"])
+            .where(table.c.SpanId == span_id)
+        ).first()
+        attrs = trace._mapping['Events.Attributes']
+        trace = next((a for a in attrs if a["uuid"] == trace_uuid), None)
+    return render_template('traces/show.html', span_id=span_id, trace=trace)
