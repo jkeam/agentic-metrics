@@ -4,7 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 from dashboard.db import get_db, get_traces
 from sqlalchemy import select, func, distinct
-from chartkick.flask import PieChart
+from chartkick.flask import PieChart, LineChart, ColumnChart, BarChart, AreaChart, ScatterChart
 from math import ceil
 
 bp = Blueprint('spans', __name__, url_prefix="/spans")
@@ -43,15 +43,15 @@ def metrics(id):
         # lead time per story
         chart_ltps = PieChart({'Blueberry': 44, 'Strawberry': 23})
         # lines of code
-        chart_dhplc = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_dhplc = LineChart({'2025-01-01': 11, '2025-01-02': 6})
         # deployment freq
-        chart_df = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_df = ColumnChart({'Sun': 32, 'Mon': 46, 'Tue': 28})
         # test coverage recovery rate
-        chart_tcrr = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_tcrr = BarChart({'Work': 32, 'Play': 1492})
         # defect leakage rate
-        chart_dlr = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_dlr = AreaChart({'2025-01-01': 11, '2025-01-02': 6})
         # technical debt reduction
-        chart_tdr = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_tdr = ScatterChart([[174.0, 80.0], [176.5, 82.3]], xtitle='Size', ytitle='Population')
         # behavior fidelity capture
         chart_bfc = PieChart({'Blueberry': 44, 'Strawberry': 23})
     return render_template(
