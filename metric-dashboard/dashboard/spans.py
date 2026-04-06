@@ -14,18 +14,30 @@ def index():
     page = request.args.get('page', 1, type=int)
     page_size = request.args.get('page_size', 50, type=int)
     db = get_db()
-    traces = get_traces()
+    tables = get_traces()
     with db.begin() as conn:
-        traces_result = conn.execute(
-            select(traces.c.SpanId, traces.c.TraceId, traces.c.Timestamp)
-            .where(traces.c.SpanName == "Agentic Metrics")
-            .order_by(traces.c.Timestamp.desc())
+        traces = conn.execute(
+            select(tables.c.SpanId, tables.c.TraceId, tables.c.Timestamp)
+            .where(tables.c.SpanName == "Agentic Metrics")
+            .order_by(tables.c.Timestamp.desc())
             .limit(page_size)
             .offset((page - 1) * page_size)
         ).fetchall()
         total = conn.execute(
-            select(func.count(distinct(traces.c.SpanId)))
-            .where(traces.c.SpanName == "Agentic Metrics")
+            select(func.count(distinct(tables.c.SpanId)))
+            .where(tables.c.SpanName == "Agentic Metrics")
         ).scalar()
         total_pages = ceil(total / page_size)
-    return render_template('spans/index.html', traces=traces_result, page=page, page_size=page_size, total=total, total_pages=total_pages)
+    return render_template('spans/index.html', traces=traces, page=page, page_size=page_size, total=total, total_pages=total_pages)
+
+@bp.route('/<id>', methods=["GET"])
+def show(id):
+    db = get_db()
+    table = get_traces()
+    with db.begin() as conn:
+        trace = conn.execute(
+            select(table.c.SpanId, table.c.TraceId, table.c.Timestamp, table.c["Events.Attributes"])
+            .where(table.c.SpanId == id)
+        ).first()
+        print(trace)
+    return render_template('spans/show.html', id=id, attrs=trace._mapping['Events.Attributes'])

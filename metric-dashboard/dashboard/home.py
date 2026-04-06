@@ -31,12 +31,12 @@ def webapp_manifest512():
 @bp.route('/', methods=["GET"])
 def index():
     db = get_db()
-    traces = get_traces()
+    table = get_traces()
     with db.begin() as conn:
         traces = conn.execute(
-            select(traces.c.TraceId, traces.c.Timestamp, traces.c["Events.Attributes"])
-            .where(traces.c.SpanName == "Agentic Metrics")
-            .order_by(traces.c.Timestamp.desc())
+            select(table.c.SpanId, table.c.TraceId, table.c.Timestamp, table.c["Events.Attributes"])
+            .where(table.c.SpanName == "Agentic Metrics")
+            .order_by(table.c.Timestamp.desc())
             .limit(10)
         ).fetchall()
         chart = PieChart({'Blueberry': 44, 'Strawberry': 23})

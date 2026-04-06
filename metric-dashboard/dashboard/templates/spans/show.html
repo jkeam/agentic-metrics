@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Spans{% endblock %}
+{% block header %}
+  <div class="pf-v6-c-content">
+    <h1>Span</h1>
+    <p>Id: {{ id }}</p>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+  <div class="pf-v6-l-gallery pf-m-gutter">
+    <!-- card -->
+    {% for attr in attrs %}
+    <div class="pf-v6-c-card">
+        <div class="pf-v6-c-card__header">
+            <div class="pf-v6-c-card__title">
+                <div class="pf-v6-c-card__title-text">Trace</div>
+            </div>
+        </div>
+        <div class="pf-v6-c-card__body">
+          <p>
+            {% if attr['created_at'] %}
+              <strong>UUID:</strong> {{ attr['uuid'] }}
+              <br />
+            {% endif %}
+            {% if attr['created_at'] %}
+              <strong>Created At:</strong> {{ attr['created_at'] }}
+              <br />
+            {% endif %}
+            {% if attr['issue_id'] %}
+              <strong>Issue At:</strong> {{ attr['issue_id'] }}
+              <br />
+            {% endif %}
+            {% if attr['issue_created_at'] %}
+              <strong>Issue Created At:</strong> {{ attr['issue_created_at'] }}
+              <br />
+            {% endif %}
+            {% if attr['merge_requested_at'] %}
+              <strong>Merge Requested At:</strong> {{ attr['merge_requested_at'] }}
+              <br />
+            {% endif %}
+            {% if attr['lines_of_code_count'] %}
+              <strong>Lines of Code:</strong> {{ attr['lines_of_code_count'] }}
+              <br />
+            {% endif %}
+            {% if attr['test_coverage_pre_migration'] %}
+              <strong>Test Coverage Per Migration:</strong> {{ attr['test_coverage_pre_migration'] }}
+              <br />
+            {% endif %}
+            {% if attr['test_coverage_post_migration'] %}
+              <strong>Test Coverage Post Migration:</strong> {{ attr['test_coverage_post_migration'] }}
+              <br />
+            {% endif %}
+            {% if attr['unit_test_failure_count'] %}
+              <strong>Unit Test Failure Count:</strong> {{ attr['unit_test_failure_count'] }}
+              <br />
+            {% endif %}
+            {% if attr['unit_test_total_count'] %}
+              <strong>Unit Test Total Count:</strong> {{ attr['unit_test_total_count'] }}
+              <br />
+            {% endif %}
+            {% if attr['cve_count_pre_migration'] %}
+              <strong>CVE Count Pre Migration:</strong> {{ attr['cve_count_pre_migration'] }}
+              <br />
+            {% endif %}
+            {% if attr['cve_count_post_migration'] %}
+              <strong>CVE Count Post Migration:</strong> {{ attr['cve_count_post_migration'] }}
+              <br />
+            {% endif %}
+            {% if attr['behavior_test_pre_migration_failure_count'] %}
+              <strong>Behavior Test Pre Migration Failure Count:</strong> {{ attr['behavior_test_pre_migration_failure_count'] }}
+              <br />
+            {% endif %}
+            {% if attr['behavior_test_pre_migration_total_count'] %}
+              <strong>Behavior Test Pre Migration Total Count:</strong> {{ attr['behavior_test_pre_migration_total_count'] }}
+              <br />
+            {% endif %}
+            {% if attr['behavior_test_post_migration_failure_count'] %}
+              <strong>Behavior Test Post Migration Failure Count:</strong> {{ attr['behavior_test_post_migration_failure_count'] }}
+              <br />
+            {% endif %}
+            {% if attr['behavior_test_post_migration_total_count'] %}
+              <strong>Behavior Test Post Migration Total Count:</strong> {{ attr['behavior_test_post_migration_total_count'] }}
+              <br />
+            {% endif %}
+          </p>
+
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

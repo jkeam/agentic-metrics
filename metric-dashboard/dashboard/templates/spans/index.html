@@ -29,6 +29,12 @@
     Timestamp
   </div>
 </div>
+<div id="tooltip-actions" class="pf-v6-c-tooltip pf-m-top tooltip-content" role="tooltip" style="display: none;">
+  <div class="pf-v6-c-tooltip__arrow" data-popper-arrow></div>
+  <div class="pf-v6-c-tooltip__content">
+    Actions
+  </div>
+</div>
 
 <!-- Traces -->
 <table class="pf-v6-c-table pf-m-grid-md" role="grid" aria-label="Simple Table Example">
@@ -49,15 +55,23 @@
           Timestamp
         </span>
       </th>
+      <th class="pf-v6-c-table__th" scope="col">
+        <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-timestamp">
+          Actions
+        </span>
+      </th>
     </tr>
   </thead>
 
   <tbody class="pf-v6-c-table__tbody">
     {% for trace in traces %}
     <tr class="pf-v6-c-table__tr">
-        <td class="pf-v6-c-table__td" data-label="UUID">{{ trace['SpanId'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="UUID">{{ trace['TraceId'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="UUID">{{ trace['Timestamp'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Span Id">{{ trace['SpanId'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Trace Id">{{ trace['TraceId'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Timestamp">{{ trace['Timestamp'] }}</td>
+        <td class="pf-v6-c-table__td" data-label="Actions">
+          <a href="/spans/{{trace['SpanId']}}"> View </a>
+        </td>
     </tr>
     {% endfor %}
   </tbody>
