@@ -39,5 +39,20 @@ def index():
             .order_by(table.c.Timestamp.desc())
             .limit(10)
         ).fetchall()
-        chart = PieChart({'Blueberry': 44, 'Strawberry': 23})
-    return render_template('home/index.html', chart=chart)
+        chart_ltps = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_dhplc = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_df = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_tcrr = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_dlr = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_tdr = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        chart_bfc = PieChart({'Blueberry': 44, 'Strawberry': 23})
+    return render_template(
+        'home/index.html',
+        chart_ltps=chart_ltps,
+        chart_dhplc=chart_dhplc,
+        chart_df=chart_df,
+        chart_tcrr=chart_tcrr,
+        chart_dlr=chart_dlr,
+        chart_tdr=chart_tdr,
+        chart_bfc=chart_bfc,
+    )

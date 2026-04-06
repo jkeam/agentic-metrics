@@ -8,30 +8,16 @@
   </div>
 {% endblock %}
 
+{% from "home/_card.html" import render_card %}
+
 {% block content %}
   <div class="pf-v6-l-gallery pf-m-gutter">
-    <!-- card -->
-    <div class="pf-v6-c-card">
-        <div class="pf-v6-c-card__header">
-            <div class="pf-v6-c-card__title">
-                <div class="pf-v6-c-card__title-text">Network Traffic</div>
-            </div>
-            <!--
-            <div class="pf-v6-c-card__actions">
-                <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="More actions">
-                    <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                </button>
-            </div>
-            -->
-        </div>
-        <div class="pf-v6-c-card__body">
-            <div class="chart-placeholder">
-                {{ chart }}
-            </div>
-        </div>
-        <div class="pf-v6-c-card__footer">
-            <a href="#">View detailed report</a>
-        </div>
-    </div>
+    {{ render_card(title="Lead Time Per Story", chart=chart_ltps) }}
+    {{ render_card(title="Developer Hours Per Lines of Code", chart=chart_dhplc) }}
+    {{ render_card(title="Deployment Frequency", chart=chart_df) }}
+    {{ render_card(title="Test Coverage Recovery Rate", chart=chart_tcrr) }}
+    {{ render_card(title="Defect Leakage Rate", chart=chart_dlr) }}
+    {{ render_card(title="Technical Debt Reduction", chart=chart_tdr) }}
+    {{ render_card(title="Behavior Fidelity Capture", chart=chart_bfc) }}
   </div>
 {% endblock %}

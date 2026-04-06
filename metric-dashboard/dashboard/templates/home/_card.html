@@ -1,0 +1,26 @@
+{% macro render_card(title, chart) %}
+<div class="pf-v6-c-card">
+    <div class="pf-v6-c-card__header">
+        <div class="pf-v6-c-card__title">
+            <div class="pf-v6-c-card__title-text">{{ title }}</div>
+        </div>
+        <!--
+        <div class="pf-v6-c-card__actions">
+            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="More actions">
+                <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+            </button>
+        </div>
+        -->
+    </div>
+    <div class="pf-v6-c-card__body">
+        <div class="chart-placeholder">
+            {{ chart }}
+        </div>
+    </div>
+    <!--
+    <div class="pf-v6-c-card__footer">
+        <a href="#">View detailed report</a>
+    </div>
+    -->
+</div>
+{% endmacro %}
