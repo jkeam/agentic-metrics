@@ -24,3 +24,8 @@ html, body {
   border-right: 0.1rem solid #fff;
   height: 3rem;
 }
+a.pf-m-disabled {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+}
