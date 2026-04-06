@@ -7,7 +7,7 @@ from sqlalchemy import select, func, distinct
 from chartkick.flask import PieChart
 from math import ceil
 
-bp = Blueprint('traces', __name__, url_prefix="/traces")
+bp = Blueprint('spans', __name__, url_prefix="/spans")
 
 @bp.route('/', methods=["GET"])
 def index():
@@ -17,7 +17,7 @@ def index():
     traces = get_traces()
     with db.begin() as conn:
         traces_result = conn.execute(
-            select(traces.c.SpanId, traces.c["Events.Attributes"])
+            select(traces.c.SpanId, traces.c.TraceId, traces.c.Timestamp)
             .where(traces.c.SpanName == "Agentic Metrics")
             .order_by(traces.c.Timestamp.desc())
             .limit(page_size)
@@ -28,4 +28,4 @@ def index():
             .where(traces.c.SpanName == "Agentic Metrics")
         ).scalar()
         total_pages = ceil(total / page_size)
-    return render_template('traces/index.html', traces=traces_result, page=page, page_size=page_size, total=total, total_pages=total_pages)
+    return render_template('spans/index.html', traces=traces_result, page=page, page_size=page_size, total=total, total_pages=total_pages)

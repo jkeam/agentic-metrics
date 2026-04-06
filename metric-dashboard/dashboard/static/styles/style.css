@@ -20,3 +20,7 @@ html, body {
   z-index: 9999 !important;
   position: absolute;
 }
+.vertical-separator {
+  border-right: 0.1rem solid #fff;
+  height: 3rem;
+}

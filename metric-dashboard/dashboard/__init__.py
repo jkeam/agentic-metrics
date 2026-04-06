@@ -28,6 +28,8 @@ def create_app(test_config=None):
     app.register_blueprint(chartkick_blueprint)
     from . import home
     app.register_blueprint(home.bp)
+    from . import spans
+    app.register_blueprint(spans.bp)
     from . import traces
     app.register_blueprint(traces.bp)
 

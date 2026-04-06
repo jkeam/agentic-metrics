@@ -234,25 +234,35 @@
 </table>
 
 <div class="pf-v6-c-pagination pf-m-bottom" id="pagination-bottom">
+
   <div class="pf-v6-c-pagination__total-items" style="display: block">
     {{ total }} total spans, {{ page_size }} {{ 'span' if page_size == 1 else 'spans' }} per page
   </div>
-  
+
+  <div class="vertical-separator"></div>
+
+  <div class="pf-v6-c-pagination__total-items" style="display: block">
+    Page Size: 
+    <input id="pagesize" class="pf-v6-c-form-control" aria-label="Page size" type="number" min="1" max="1000" value="{{ page_size }}">
+  </div>
+
+  <div class="vertical-separator"></div>
+
   <nav class="pf-v6-c-pagination__nav" aria-label="Pagination">
     
     <div class="pf-v6-c-pagination__nav-control pf-m-first">
       <a href="/traces?page={{1}}&page_size={{page_size}}">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to first page" {{ 'disabled' if page == 1 else '' }}>
-        <i class="fas fa-angle-double-left" aria-hidden="true"></i>
-      </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to first page" {{ 'disabled' if page == 1 else '' }}>
+          <i class="fas fa-angle-double-left" aria-hidden="true"></i>
+        </button>
       </a>
     </div>
     
     <div class="pf-v6-c-pagination__nav-control pf-m-prev">
       <a href="/traces?page={{page-1}}&page_size={{page_size}}">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page" {{ 'disabled' if page == 1 else '' }}>
-         <i class="fas fa-angle-left" aria-hidden="true"></i>
-      </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page" {{ 'disabled' if page == 1 else '' }}>
+           <i class="fas fa-angle-left" aria-hidden="true"></i>
+        </button>
       </a>
     </div>
     
@@ -263,9 +273,9 @@
     
     <div class="pf-v6-c-pagination__nav-control pf-m-next">
       <a href="/traces?page={{page+1}}&page_size={{page_size}}">
-      <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page" {{ 'disabled' if total_pages == page else ''}}>
-         <i class="fas fa-angle-right" aria-hidden="true"></i>
-      </button>
+        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page" {{ 'disabled' if total_pages == page else ''}}>
+           <i class="fas fa-angle-right" aria-hidden="true"></i>
+        </button>
       </a>
     </div>
     
@@ -280,45 +290,16 @@
   </nav>
 </div>
 
-<!-- Hover over tooltip -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/tooltip.js') }}"></script>
 <script type="text/javascript">
-// Initialize all tooltips
-document.querySelectorAll('.tooltip-trigger').forEach(trigger => {
-  const tooltipId = trigger.getAttribute('data-target');
-  const tooltip = document.getElementById(tooltipId);
-
-  if (!tooltip) return;
-
-  // Create the Popper instance for this specific pair
-  const popperInstance = Popper.createPopper(trigger, tooltip, {
-    placement: 'top',
-    modifiers: [
-      { name: 'flip', enabled: false }, // Force it to stay on top
-      { name: 'offset', options: { offset: [0, 8] } }
-    ],
-  });
-
-  // Show logic
-  function show() {
-    tooltip.style.display = 'block';
-    popperInstance.update();
-  }
-
-  // Hide logic
-  function hide() {
-    tooltip.style.display = 'none';
-  }
-
-  // Bind events to this specific trigger
-  trigger.addEventListener('mouseenter', show);
-  trigger.addEventListener('focus', show);
-  trigger.addEventListener('mouseleave', hide);
-  trigger.addEventListener('blur', hide);
-});
-
 document.getElementById('currentpagination').addEventListener('change', function(event) {
   if (this.value) {
     window.location.assign(`/traces?page_size={{page_size}}&page=${this.value}`);
+  }
+});
+document.getElementById('pagesize').addEventListener('change', function(event) {
+  if (this.value) {
+    window.location.assign(`/traces?page_size=${this.value}&page={{page}}`);
   }
 });
 </script>
