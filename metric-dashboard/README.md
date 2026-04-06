@@ -5,14 +5,16 @@ Assuming you have already run the instructions found in `../metric-generator`.
 ## Environment
 
 ```shell
+# this project gets created from the ../metric-generator project
 oc project openlit
+# expose db
 oc apply -f ./openshift/db-route.yaml
 ```
 
 ## Setup
 
 ```shell
-uv python pin 3.11
+uv python pin 3.12
 uv sync
 ```
 
