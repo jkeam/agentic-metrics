@@ -204,12 +204,12 @@
           Behavior Test Post Migration Failures
         </span>
       </th>
-      <th class="pf-v6-c-table__th pf-m-truncate" scope="col">
+      <th class="pf-v6-c-table__th" scope="col">
         <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-btpostmtc">
           Behavior Test Post Migration Total Count
         </span>
       </th>
-      <th class="pf-v6-c-table__th pf-m-truncate" scope="col">
+      <th class="pf-v6-c-table__th" scope="col">
         <span class="pf-v6-c-tooltip__trigger tooltip-trigger" data-target="tooltip-actions">
           Actions
         </span>
@@ -221,24 +221,24 @@
     {% for trace in traces %}
     {% for attr in trace['Events.Attributes'] %}
     <tr class="pf-v6-c-table__tr">
-        <td class="pf-v6-c-table__td" data-label="UUID">{{ trace['SpanId'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="UUID">{{ attr['uuid'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Created At">{{ attr['created_at'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Issue Id">{{ attr['issue_id'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Issue Created At">{{ attr['issue_created_at'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Merge Requested At">{{ attr['merge_requested_at'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Lines of Code">{{ attr['lines_of_code_count'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Test Coverage Per Migration">{{ attr['test_coverage_pre_migration'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Test Coverage Post Migration">{{ attr['test_coverage_post_migration'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Unit Test Failure Count">{{ attr['unit_test_failure_count'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Unit Test Total Count">{{ attr['unit_test_total_count'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="CVE Count Pre Migration">{{ attr['cve_count_pre_migration'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="CVE Count Post Migration">{{ attr['cve_count_post_migration'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Behavior Test Pre Migration Failure Count">{{ attr['behavior_test_pre_migration_failure_count'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Behavior Test Pre Migration Total Count">{{ attr['behavior_test_pre_migration_total_count'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Behavior Test Post Migration Failure Count">{{ attr['behavior_test_post_migration_failure_count'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Behavior Test Post Migration Total Count">{{ attr['behavior_test_post_migration_total_count'] }}</td>
-        <td class="pf-v6-c-table__td" data-label="Actions">
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="UUID">{{ trace['SpanId'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="UUID">{{ attr['uuid'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Created At">{{ attr['created_at'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Issue Id">{{ attr['issue_id'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Issue Created At">{{ attr['issue_created_at'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Merge Requested At">{{ attr['merge_requested_at'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Lines of Code">{{ attr['lines_of_code_count'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Test Coverage Per Migration">{{ attr['test_coverage_pre_migration'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Test Coverage Post Migration">{{ attr['test_coverage_post_migration'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Unit Test Failure Count">{{ attr['unit_test_failure_count'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Unit Test Total Count">{{ attr['unit_test_total_count'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="CVE Count Pre Migration">{{ attr['cve_count_pre_migration'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="CVE Count Post Migration">{{ attr['cve_count_post_migration'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Behavior Test Pre Migration Failure Count">{{ attr['behavior_test_pre_migration_failure_count'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Behavior Test Pre Migration Total Count">{{ attr['behavior_test_pre_migration_total_count'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Behavior Test Post Migration Failure Count">{{ attr['behavior_test_post_migration_failure_count'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Behavior Test Post Migration Total Count">{{ attr['behavior_test_post_migration_total_count'] }}</td>
+        <td class="pf-v6-c-table__td pf-m-truncate" data-label="Actions">
           <a href="/traces/{{trace['SpanId']}}/{{attr['uuid']}}"> View </a>
         </td>
     </tr>
