@@ -216,7 +216,11 @@
         {% for trace in traces %}
         {% for attr in trace['Events.Attributes'] %}
         <tr class="pf-v6-c-table__tr">
-            <td class="pf-v6-c-table__td pf-m-truncate" data-label="UUID">{{ trace['SpanId'] }}</td>
+            <td class="pf-v6-c-table__td pf-m-truncate" data-label="UUID">
+                <a href="/events/{{trace['SpanId']}}/{{attr['uuid']}}">
+                    {{ trace['SpanId'] }}
+                </a>
+            </td>
             <td class="pf-v6-c-table__td pf-m-truncate" data-label="UUID">{{ attr['uuid'] }}</td>
             <td class="pf-v6-c-table__td pf-m-truncate" data-label="Created At">{{ attr['created_at'] }}</td>
             <td class="pf-v6-c-table__td pf-m-truncate" data-label="Issue Id">{{ attr['issue_id'] }}</td>
