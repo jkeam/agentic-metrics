@@ -3,7 +3,7 @@ name = "dashboard"
 version = "0.1.0"
 description = "Dashboard to see metrics"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
     "chartkick>=1.1.0",
     "clickhouse-connect>=0.15.1",
@@ -17,5 +17,5 @@ dev = [
 ]
 
 [tool.black]
-target-version = ["py311"]
+target-version = ["py312"]
 line-length = 88
