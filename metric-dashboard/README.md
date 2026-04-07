@@ -43,3 +43,21 @@ podman build -t quay.io/jkeam/metric-dashboard -f ./Containerfile .
 # test by running it
 # podman run --rm --env-file .env -p 8000:8000 -t quay.io/jkeam/metric-dashboard
 ```
+
+## Deploying on OpenShift
+
+If you built your own image, update it in `./openshift/app/kustomization.yaml` or `./openshift/app/app-deployment.yaml`.
+
+```shell
+# make sure you are logged in
+oc project openlit
+oc apply -k ./openshift/app
+```
+
+Then update the cluster and domain name in `./openshift/app/app-link.yaml`.
+
+```shell
+oc apply -f ./openshift/app/app-link.yaml
+```
+
+To update charts, modify `./openshift/app/app-cm.yaml` and recreate configmap and bounce pod.
