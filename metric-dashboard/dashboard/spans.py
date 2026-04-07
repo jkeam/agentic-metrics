@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, current_app
 )
 from werkzeug.exceptions import abort
 from dashboard.db import get_db, get_traces
@@ -12,6 +12,7 @@ bp = Blueprint('spans', __name__, url_prefix="/spans")
 
 @bp.route('/', methods=["GET"])
 def index():
+    span_name = current_app.config["SPAN_NAME"]
     page = request.args.get('page', 1, type=int)
     page_size = request.args.get('page_size', 50, type=int)
     db = get_db()
@@ -19,14 +20,14 @@ def index():
     with db.begin() as conn:
         traces = conn.execute(
             select(tables.c.SpanId, tables.c.TraceId, tables.c.Timestamp)
-            .where(tables.c.SpanName == "Agentic Metrics")
+            .where(tables.c.SpanName == span_name)
             .order_by(tables.c.Timestamp.desc())
             .limit(page_size)
             .offset((page - 1) * page_size)
         ).fetchall()
         total = conn.execute(
             select(func.count(distinct(tables.c.SpanId)))
-            .where(tables.c.SpanName == "Agentic Metrics")
+            .where(tables.c.SpanName == span_name)
         ).scalar()
         total_pages = ceil(total / page_size)
     return render_template('spans/index.html', traces=traces, page=page, page_size=page_size, total=total, total_pages=total_pages)

@@ -26,6 +26,7 @@ DB_PORT=8123
 DB_USER=default
 DB_PASSWORD=OPENLIT
 DYNAMIC_CHART_PATH="" # empty string turns off dynamic chart functionality
+SPAN_NAME="Agentic Metrics"
 ```
 
 ## Run

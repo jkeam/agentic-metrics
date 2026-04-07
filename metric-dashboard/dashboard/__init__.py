@@ -11,6 +11,7 @@ def create_app(test_config=None):
         DB_USER = getenv("DB_USER", "default"),
         DB_PASSWORD = getenv("DB_PASSWORD", "OPENLIT"),
         DYNAMIC_CHART_PATH = getenv("DYNAMIC_CHART_PATH", ""),
+        SPAN_NAME = getenv("SPAN_NAME", "Agentic Metrics"),
     )
 
     if test_config is None:
