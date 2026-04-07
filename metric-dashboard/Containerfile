@@ -1,5 +1,4 @@
 FROM registry.access.redhat.com/ubi9/python-312-minimal:9.7 as build
-# FROM registry.access.redhat.com/ubi9/python-312:9.6-1749631862 as build
 USER 0
 COPY pyproject.toml uv.lock .
 RUN pip install -U pip && \
@@ -9,7 +8,6 @@ RUN pip install -U pip && \
 
 # Final uses requirements.txt
 FROM registry.access.redhat.com/ubi9/python-312-minimal:9.7 as final
-# FROM registry.access.redhat.com/ubi9/python-312:9.6-1749631862 as final
 
 # install deps
 USER 1001
@@ -19,7 +17,7 @@ RUN pip install -U pip && pip install -r requirements.txt
 # source code
 COPY . .
 
-# Allow statements and log messages to immediately appear in the Knative logs
+# Allow statements and log messages to immediately appear
 ENV PYTHONUNBUFFERED True
 
 EXPOSE 8000

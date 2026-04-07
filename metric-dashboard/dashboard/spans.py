@@ -6,6 +6,7 @@ from dashboard.db import get_db, get_traces
 from sqlalchemy import select, func, distinct
 from chartkick.flask import PieChart, LineChart, ColumnChart, BarChart, AreaChart, ScatterChart
 from math import ceil
+from dashboard.utils.loader import dynamically_load_charts
 
 bp = Blueprint('spans', __name__, url_prefix="/spans")
 
@@ -39,31 +40,14 @@ def metrics(id):
             select(table.c.SpanId, table.c.TraceId, table.c.Timestamp, table.c["Events.Attributes"])
             .where(table.c.SpanId == id)
         ).first()
+
+        span = {"span_id": trace.SpanId, "trace_id": trace.TraceId, "timestamp": trace.Timestamp}
         attrs = trace._mapping['Events.Attributes']
-        # lead time per story
-        chart_ltps = PieChart({'Blueberry': 44, 'Strawberry': 23})
-        # lines of code
-        chart_dhplc = LineChart({'2025-01-01': 11, '2025-01-02': 6})
-        # deployment freq
-        chart_df = ColumnChart({'Sun': 32, 'Mon': 46, 'Tue': 28})
-        # test coverage recovery rate
-        chart_tcrr = BarChart({'Work': 32, 'Play': 1492})
-        # defect leakage rate
-        chart_dlr = AreaChart({'2025-01-01': 11, '2025-01-02': 6})
-        # technical debt reduction
-        chart_tdr = ScatterChart([[174.0, 80.0], [176.5, 82.3]], xtitle='Size', ytitle='Population')
-        # behavior fidelity capture
-        chart_bfc = PieChart({'Blueberry': 44, 'Strawberry': 23})
+        dynamic_charts = dynamically_load_charts(span, attrs)
     return render_template(
         'spans/metrics.html',
         id=id,
-        chart_ltps=chart_ltps,
-        chart_dhplc=chart_dhplc,
-        chart_df=chart_df,
-        chart_tcrr=chart_tcrr,
-        chart_dlr=chart_dlr,
-        chart_tdr=chart_tdr,
-        chart_bfc=chart_bfc,
+        dynamic_charts=dynamic_charts,
     )
 
 @bp.route('/<id>', methods=["GET"])

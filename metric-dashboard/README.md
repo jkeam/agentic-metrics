@@ -25,6 +25,7 @@ DB_HOST=your-clickhouse-db.com
 DB_PORT=8123
 DB_USER=default
 DB_PASSWORD=OPENLIT
+DYNAMIC_CHART_PATH="" # empty string turns off dynamic chart functionality
 ```
 
 ## Run
