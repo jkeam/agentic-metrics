@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metric-dashboard-cm
+  namespace: openlit
+data:
+  bar.py: |
+    from chartkick.flask import BarChart
+    def run(span, events):
+      return BarChart({'Work': 32, 'Play': 1492})
+  area.py: |
+    from chartkick.flask import AreaChart
+    def run(span, events):
+      return AreaChart({'2025-01-01': 11, '2025-01-02': 6})
+  column.py: |
+    from chartkick.flask import ColumnChart
+    def run(span, events):
+      return ColumnChart({'Sun': 32, 'Mon': 46, 'Tue': 28})
+  line.py: |
+    from chartkick.flask import LineChart
+    def run(span, events):
+      return LineChart({'2025-01-01': 11, '2025-01-02': 6})
+  pie.py: |
+    from chartkick.flask import PieChart
+    def run(span, events):
+      return PieChart({'Blueberry': 44, 'Strawberry': 23})
+  scatter.py: |
+    from chartkick.flask import ScatterChart
+    def run(span, events):
+      return ScatterChart([[174.0, 80.0], [176.5, 82.3]], xtitle='Size', ytitle='Population')

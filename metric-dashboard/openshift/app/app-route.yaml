@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: metric-dashboard
+  namespace: openlit
+  labels:
+    app: metric-dashboard
+spec:
+  path: /
+  to:
+    kind: Service
+    name: metric-dashboard
+    weight: 100
+  port:
+    targetPort: theport
+  tls:
+    termination: edge

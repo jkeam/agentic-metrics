@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metric-dashboard
+  namespace: openlit
+  labels:
+    app: metric-dashboard
+    app.kubernetes.io/part-of: agentic-metrics
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-version: '3.12'
+    app.kubernetes.io/name: 'metric-dashboard'
+  annotations:
+    app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"StatefulSet","name":"openlit-db"}]'
+    app.openshift.io/vcs-uri: 'https://github.com/jkeam/agentic-metrics.git'
+    app.openshift.io/vcs-ref: 'main'
+spec:
+  selector:
+    matchLabels:
+      app: metric-dashboard
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: metric-dashboard
+    spec:
+      containers:
+      - name: metric-dashboard
+        image: quay.io/jkeam1/metric-dashboard
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: metric-dashboard-secret
+        ports:
+        - containerPort: 8000
+          name: theport
+        volumeMounts:
+        - name: chart-volume
+          mountPath: /opt/app-root/charts
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          initialDelaySeconds: 2
+          periodSeconds: 2
+          failureThreshold: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          failureThreshold: 10
+      restartPolicy: Always
+      volumes:
+        - name: chart-volume
+          configMap:
+            name: metric-dashboard-cm
