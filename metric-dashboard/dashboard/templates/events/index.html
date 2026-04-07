@@ -246,52 +246,9 @@
     </tbody>
 </table>
 
-<!-- Pagination -->
-<div class="pf-v6-c-pagination pf-m-bottom" id="pagination-bottom">
-    <div class="pf-v6-c-pagination__total-items" style="display: block">
-        {{ total }} total spans, {{ page_size }} {{ 'span' if page_size == 1 else 'spans' }} per page
-    </div>
-    <div class="vertical-separator"></div>
-    <div class="pf-v6-c-pagination__total-items" style="display: block">
-        Page Size:
-        <input id="pagesize" class="pf-v6-c-form-control" aria-label="Page size" type="number" min="1" max="1000" value="{{ page_size }}">
-    </div>
-    <div class="vertical-separator"></div>
-    <nav class="pf-v6-c-pagination__nav" aria-label="Pagination">
-        <div class="pf-v6-c-pagination__nav-control pf-m-first">
-            <a href="/events?page={{1}}&page_size={{page_size}}" class="{{ 'pf-m-disabled' if page == 1 else '' }}">
-                <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to first page" {{ 'disabled' if page == 1 else '' }}>
-                    <i class="fas fa-angle-double-left" aria-hidden="true"></i>
-                </button>
-            </a>
-        </div>
-        <div class="pf-v6-c-pagination__nav-control pf-m-prev">
-            <a href="/events?page={{[page-1, 1] | max}}&page_size={{page_size}}" class="{{ 'pf-m-disabled' if page == 1 else '' }}">
-                <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to previous page" {{ 'disabled' if page == 1 else '' }}>
-                    <i class="fas fa-angle-left" aria-hidden="true"></i>
-                </button>
-            </a>
-        </div>
-        <div class="pf-v6-c-pagination__nav-page-select">
-            <input id="currentpagination" class="pf-v6-c-form-control" aria-label="Current page" type="number" min="1" max="{{ total }}" value="{{ page }}">
-            <span aria-hidden="true">of {{ total_pages }}</span>
-        </div>
-        <div class="pf-v6-c-pagination__nav-control pf-m-next">
-            <a href="/events?page={{[page+1, total_pages] | min}}&page_size={{page_size}}" class="{{ 'pf-m-disabled' if total_pages == page else '' }}">
-                <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to next page" {{ 'disabled' if total_pages == page else ''}}>
-                    <i class="fas fa-angle-right" aria-hidden="true"></i>
-                </button>
-            </a>
-        </div>
-        <div class="pf-v6-c-pagination__nav-control pf-m-last">
-            <a href="/events?page={{total_pages}}&page_size={{page_size}}" class="{{ 'pf-m-disabled' if total_pages == page else '' }}">
-                <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Go to last page" {{ 'disabled' if total_pages == page else ''}}>
-                    <i class="fas fa-angle-double-right" aria-hidden="true"></i>
-                </button>
-            </a>
-        </div>
-    </nav>
-</div>
+{% from "common/_pagination.html" import render_pagination %}
+{{ render_pagination("events", total, total_pages, page_size, page) }}
+
 <script type="text/javascript" src="{{ url_for('static', filename='js/tooltip.js') }}"></script>
 <script type="text/javascript">
 document.getElementById('currentpagination').addEventListener('change', function(event) {
